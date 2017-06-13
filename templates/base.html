@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Fight Against Climate Change{% endblock %}</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Arsenal" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static "changeActions/style.css" %}">
+    <link rel="icon" href="{% static "changeActions/images/favicon.ico" %} " type=image/x-icon">
+
+	<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script type="text/javascript" src={% static "changeActions/javascript.js" %}></script>
+</head>
+
+<body>
+
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '1372909599443997',
+          cookie     : true,
+          xfbml      : true,
+          version    : 'v2.8'
+        });
+        FB.AppEvents.logPageView();
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <nav class="navbar navbar-default" role="navigation">
+		<div class="container-fluid">
+			<div id="myNavBarBrand">
+				<a href={% url 'choices' %}><p class="navbar-text">The Good Fight</p></a>
+			</div>
+			<ul class="nav navbar-nav navbar-left">
+				<li><a class="nav-link" href="#">Index</a></li>
+				<li><a class="nav-link" href="#">About<span class="sr-only">(current)</span></a></li>
+				<li><a class="nav-link" href="#">Contact</a></li>
+				<li></li>
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li><p id="you-save" class="navbar-text">You have saved 100 pounds of CO2</p></li>
+				<li><p id="world-save" class="navbar-text">The world has saved 1000 pounds of CO2</p></li>
+
+                {% if not user.is_authenticated %}
+                <li id="SignIn" class="dropdown rightdrop margin-right">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <p class="toBold">Sign In<span class="caret"></span></p></a>
+                    <ul id="login-dp" class="dropdown-menu rightdrop">
+                        <li>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p class="toBold margin-left">Login Via</p>
+                                    <div class="social-buttons">
+                                        <a id="fb-login" href="#" class="btn btn-fb">
+                                            <i class="fa fa-facebook"></i>
+                                            Facebook
+                                        </a>
+                                        <a href="#" class="btn btn-tw">
+                                            <i class="fa fa-twitter"></i>
+                                            Twitter
+
+                                        </a>
+                                    </div>
+
+                                    <form id="login-nav" class="form" role="form" method="post" action="{% url 'user_login'%}" accept-charset="UTF-8">
+                                        {% csrf_token %}
+                                        <div class="form group">
+                                            <label class="sr-only" for="InputUsername">Username</label>
+                                            <input type="text" id="InputUsername" class="form-control" name="username" placeholder="Username" required/>
+                                        </div>
+                                        <div class="form group">
+                                            <label class="sr-only" for="InputPassword">Password</label>
+                                            <input type="password" id="InputPassword" class="form-control" name="password" placeholder="Password" required/>
+                                            <div class="help-block text-right">
+                                                <a class="margin-right" href="{% url 'password_reset' %}">Forget the password?</a>
+                                            </div>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <button type="submit" class="btn btn-primary">Sign In</button>
+                                        </div>
+                                        <!--<div class="checkbox">
+                                            <label>
+                                                <input type="checkbox">Keep Me Logged-In
+                                            </label>
+                                        </div>-->
+                                    </form>
+                                </div>
+                                <div class="bottom text-center">
+                                    New Here? <a href={% url 'signup' %}><p class="toBold">Join The Fight!</p></a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                {% else %}
+                <li id="userStats" class="dropdown rightdrop margin-right">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <p class="toBold">{{ user.username }}<span class="caret"></span></p></a>
+                    <ul class="dropdown-menu rightdrop">
+                        <li>
+                            <p>You have saved <span class="toBold">100 pounds of CO2</span></p>
+                            <div class="bottom text-center">
+                                <a href="{% url 'user_logout' %}"><p class="toBold">Logout</p></a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+                {% endif %}
+
+
+			</ul>
+		</div>
+
+	</nav>
+
+    {% for message in messages %}
+        <p class="alert alert-warning">{{ message }}</p>
+    {% endfor %}
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>

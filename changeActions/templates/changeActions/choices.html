@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div id="main">
+		<h2 class="prompt">How much time do you have?</h2>
+		<br>
+		<div class="row choicerow" id="timeChoices">
+			<div class="col-md-3 choicecol">
+                <form action="{% url 'shortActions' %}">
+                    <button id="short-button" class="btn btn-block choicebutton">Not Long</button>
+                </form>
+			</div>
+
+			<div class="col-md-3 choicecol">
+                <form action="{% url 'mediumActions' %}">
+	    			<button id="medium-button" class="btn btn-block choicebutton">A While</button>
+                </form>
+			</div>
+
+			<div class="col-md-3 choicecol">
+                <form action="{% url 'longActions' %}">
+				    <button id="long-button" class="btn btn-block choicebutton">Ages</button>
+                </form>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

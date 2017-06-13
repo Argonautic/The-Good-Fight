@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div id="action">
+		<h2 id="action-name">{{ action.name }}</h2>
+		<p id="action-desc">{{ action.description }}</p>
+		<br>
+		<p><span style="font-weight: bold;">Time: </span>{{ action.time }}</p>
+		<br>
+		<p><a href={{ action.link }}>{{ action.linkText }}</a></p>
+		<br>
+		<div id="action-buttons">
+			<button id="another-one" class="btn btn-info">Another One</button>
+			<button id="completed-button" class="btn btn-primary">Completed!</button>
+		</div>
+	</div>
+{% endblock %}
