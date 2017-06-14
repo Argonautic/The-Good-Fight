@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.messages import error
+from django.contrib.messages import error, info
 from django import forms
 
 def signup(request):
@@ -16,7 +16,7 @@ def signup(request):
             return redirect('choices')
     else:
         form = UserCreationForm()
-    return render(request, 'changeActions/signup.html', {'form': form})
+    return render(request, 'login/signup.html', {'form': form})
 
 def user_login(request):
     username = request.POST['username']
@@ -32,8 +32,3 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('choices')
-
-def password_reset(request):
-    return render(request, 'login/password_reset_form.html')
-
-
