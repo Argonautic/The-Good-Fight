@@ -41,7 +41,7 @@ body {
 
 #main {
 	margin: auto;
-	margin-top: 90px;
+	margin-top: 70px;
 	width: 80%;
 }
 
@@ -85,4 +85,18 @@ body {
 .text-left-with-margin {
 	margin-left: 40px;
 	text-align: left;
+}
+
+#alertbar {
+	height: 15px;
+}
+
+#myNavbar {
+	margin-bottom: 0px;
+	height: 70px;
+}
+
+#userStats {
+	padding-left: 5px;
+	padding-right: 5px;
 }
