@@ -5,24 +5,17 @@ from .models import *
 def choices(request):
     return render(request, 'changeActions/choices.html')
 
-def shortActions(request):
-    allShortActions = ChangeAction.objects.filter(category__name="Short Actions")
-    randAction = allShortActions[random.randint(0, len(allShortActions) - 1)]
-    return redirect('detail', randAction.id)
-
-def mediumActions(request):
-    allMediumActions = ChangeAction.objects.filter(category__name="Medium Actions")
-    randAction = allMediumActions[random.randint(0, len(allMediumActions) - 1)]
-    return redirect('detail', randAction.id)
-
-def longActions(request):
-    allLongActions = ChangeAction.objects.filter(category__name="Long Actions")
-    randAction = allLongActions[random.randint(0, len(allLongActions) - 1)]
+def choiceActions(request, timespan):
+    # picking one of the different categories of actions
+    actions = ChangeAction.objects.filter(category__name=timespan)
+    randAction = actions[random.randint(0, len(actions) - 1)]
     return redirect('detail', randAction.id)
 
 def detail(request, action_id):
+    # details page of a changeAction
     action = get_object_or_404(ChangeAction, pk=action_id)
-    return render(request, 'changeActions/detail.html', {'action': action})
+    category = Category.objects.get(changeaction__id__contains=action.pk)
+    return render(request, 'changeActions/detail.html', {'action': action, 'category': category})
 
 def index(request):
     allCategories = Category.objects.all()

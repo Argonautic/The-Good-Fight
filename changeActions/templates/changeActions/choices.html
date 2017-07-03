@@ -8,19 +8,22 @@
 		<br>
 		<div class="row choicerow" id="timeChoices">
 			<div class="col-md-3 choicecol">
-                <form action="{% url 'shortActions' %}">
+                <!-- the url tag will redirect to changeactions/urls.py and find the urlpattern with the name
+                of 'choiceActions'. The second argument (e.g. 'Short_Actions') will be passed as the string
+                to be captured in the choiceActions capture group-->
+                <form action="{% url 'choiceActions' 'Short_Actions' %}">
                     <button id="short-button" class="btn btn-block choicebutton">Not Long</button>
                 </form>
 			</div>
 
 			<div class="col-md-3 choicecol">
-                <form action="{% url 'mediumActions' %}">
+                <form action="{% url 'choiceActions' 'Medium_Actions' %}">
 	    			<button id="medium-button" class="btn btn-block choicebutton">A While</button>
                 </form>
 			</div>
 
 			<div class="col-md-3 choicecol">
-                <form action="{% url 'longActions' %}">
+                <form action="{% url 'choiceActions' 'Long_Actions' %}">
 				    <button id="long-button" class="btn btn-block choicebutton">Ages</button>
                 </form>
 			</div>

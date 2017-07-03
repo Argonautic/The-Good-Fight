@@ -11,9 +11,10 @@
 		<p><a href={{ action.link }}>{{ action.linkText }}</a></p>
 		<br>
 		<div id="action-buttons">
-            <!--<form action="{% url %}">-->
-            <button id="another-one" class="btn btn-info">Another One</button>
-            <!--</form>-->
+            <form action="{% url 'choiceActions' category %}">
+                <button id="another-one" class="btn btn-info">Another One</button>
+            </form>
+            <br>
 			<button id="completed-button" class="btn btn-primary">Completed!</button>
 		</div>
 	</div>
