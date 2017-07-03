@@ -126,17 +126,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+# The central folder in this django project where all static files will be stored. Path must use
+# Unix style forward slashes
 STATICFILES_DIRS = [
-    "C:/Users/Jonathan/Documents/Programming/Projects/TheGoodFight/static/",
-    os.path.join(BASE_DIR, "/static"),
+    os.path.join(BASE_DIR, 'static').replace('\\', '/'),
 ]
 
-LOGIN_URL = 'user_login'
-LOGOUT_URL = 'user_logout'
-LOGIN_REDIRECT_URL = '/login_successful'
+"""# the default url names that users get redirected to after the described actions
+LOGIN_URL = 'user_login='
+#LOGOUT_URL = 'user_logout'
+#LOGIN_REDIRECT_URL = '/login_successful'"""
 
+# the default url names userse get redirected to after social auth logins
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/login_successful'
 SOCIAL_AUTH_LOGIN_URL = '/'
 
@@ -144,11 +146,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-#SMTP username and password stored in localfiles.py, not synced up to github
+# SMTP username and password stored in localfiles.py, not synced up to github
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL = EMAIL_HOST_USER
 
+# The Backends used for social media authentications
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.twitter.TwitterOAuth',
     'social_core.backends.facebook.FacebookOAuth2',

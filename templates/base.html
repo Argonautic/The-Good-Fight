@@ -19,26 +19,6 @@
 
 <body>
 
-    <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : '1372909599443997',
-          cookie     : true,
-          xfbml      : true,
-          version    : 'v2.8'
-        });
-        FB.AppEvents.logPageView();
-      };
-
-      (function(d, s, id){
-         var js, fjs = d.getElementsByTagName(s)[0];
-         if (d.getElementById(id)) {return;}
-         js = d.createElement(s); js.id = id;
-         js.src = "//connect.facebook.net/en_US/sdk.js";
-         fjs.parentNode.insertBefore(js, fjs);
-       }(document, 'script', 'facebook-jssdk'));
-    </script>
-
     <nav id="myNavbar" class="navbar navbar-default" role="navigation">
 		<div class="container-fluid">
 			<div id="myNavBarBrand">
@@ -92,11 +72,6 @@
                                         <div class="form-group text-center">
                                             <button type="submit" class="btn btn-primary">Sign In</button>
                                         </div>
-                                        <!--<div class="checkbox">
-                                            <label>
-                                                <input type="checkbox">Keep Me Logged-In
-                                            </label>
-                                        </div>-->
                                     </form>
                                 </div>
                                 <div class="bottom text-center">
@@ -112,6 +87,7 @@
                 <li class="dropdown rightdrop margin-right">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <p class="toBold">
+                            <!-- This if block is so logins from social media display the user's name -->
                             {% if user.first_name and user.last_name %}
                                 {{ user.first_name }} {{ user.last_name }}
                             {% else %}
